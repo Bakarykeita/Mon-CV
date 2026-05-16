@@ -91,10 +91,9 @@
     /* Photo */
     .profile-header {
       background: var(--accent);
-      padding: 35px 25px 25px;
+      padding: 35px 25px 60px;
       text-align: center;
       position: relative;
-      overflow: hidden;
     }
     .profile-header::before {
       content: '';
@@ -439,35 +438,83 @@
     /* ===== RESPONSIVE ===== */
     @media (max-width: 720px) {
       body { padding: 0; }
-      .menu-toggle { display: flex; align-items: center; justify-content: center; }
+ 
+      .menu-toggle {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+ 
       .cv {
         grid-template-columns: 1fr;
         border-radius: 0;
         box-shadow: none;
       }
+ 
+      /* ---- SIDEBAR DRAWER ---- */
       .left {
-        transform: translateX(-100%);
         position: fixed;
-        top: 0; left: 0;
-        height: 100vh;
-        width: 80%;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 75%;
         max-width: 300px;
         z-index: 900;
-        overflow-y: auto;
+        overflow-y: scroll;
+        overflow-x: hidden;
+        -webkit-overflow-scrolling: touch;
+        transform: translateX(-100%);
         transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        padding-bottom: 80px;
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: column;
       }
       .left.open { transform: translateX(0); }
-      .overlay {
-        display: none;
-        position: fixed;
-        inset: 0;
-        background: rgba(0,0,0,0.5);
-        z-index: 850;
-        backdrop-filter: blur(2px);
+ 
+      /* ---- PHOTO HEADER ---- */
+      .profile-header {
+        padding: 60px 20px 25px;
+        overflow: visible;
+        flex-shrink: 0;
       }
-      .overlay.active { display: block; }
+      .profile-header::before { display: none; }
+ 
+      .photo-wrap {
+        width: 110px;
+        height: 110px;
+        margin: 0 auto 10px;
+      }
+      .photo-wrap::before,
+      .photo-wrap::after { inset: -3px; }
+      .photo {
+        width: 102px;
+        height: 102px;
+      }
+ 
+      /* ---- SECTIONS GAUCHE ---- */
+      .left-section {
+        padding: 20px 20px 0;
+        width: 100%;
+        box-sizing: border-box;
+        flex-shrink: 0;
+      }
+      .divider {
+        margin: 18px 20px 0;
+        flex-shrink: 0;
+      }
+ 
+      /* ---- COMPÉTENCES ---- */
+      .skill-tag {
+        font-size: 11px;
+        padding: 4px 8px;
+        margin: 3px 2px 3px 0;
+      }
+ 
+      /* ---- CÔTÉ DROIT ---- */
       .right { min-height: 100vh; }
-      .name-header h1 { font-size: 26px; }
+      .name-header { padding: 50px 20px 20px; }
+      .name-header h1 { font-size: 24px; }
       .right-body { padding: 20px; }
       .print-btn { bottom: 15px; right: 15px; }
     }
